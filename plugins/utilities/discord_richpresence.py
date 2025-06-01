@@ -3,7 +3,7 @@
 """placeholder :clown:"""
 
 # ba_meta require api 9
-#!"Made to you by @brostos & @Dliwk" .
+#!"Made to you by @brostos & @Dliwk" 
 
 
 from __future__ import annotations
