@@ -1,4 +1,7 @@
 ## Plugin Manager (dd-mm-yyyy)
+### 1.1.11 (15-07-2026)
+
+- New plugin manager logo
 
 ### 1.1.10 (12-06-2026)
 
