@@ -25,7 +25,7 @@ from datetime import datetime
 # Modules used for overriding AllSettingsWindow
 import logging
 
-PLUGIN_MANAGER_VERSION = "1.1.10"
+PLUGIN_MANAGER_VERSION = "1.1.11"
 REPOSITORY_URL = "https://github.com/bombsquad-community/plugin-manager"
 # Current tag can be changed to "staging" or any other branch in
 # plugin manager repo for testing purpose.
@@ -3342,13 +3342,34 @@ class NewAllSettingsWindow(AllSettingsWindow):
         )
         _b_title(x_offs6, v, pmb, bui.Lstr(value="Plugin Manager"))
         imgw = imgh = 120
+        # Logo crafted by brostos
+        # Wizard holding magic wand(Powerful Modders)
+        # Wizard holding heart( Mrmaxmeier and red for the maintainers of plugman)
         bui.imagewidget(
             parent=self._root_widget,
             position=(x_offs6 + basew * 0.49 - imgw * 0.5 + 5, v + 35),
             size=(imgw, imgh),
             color=(0.8, 0.95, 1),
-            texture=bui.gettexture('storeIcon'),
-            draw_controller=pmb
+            texture=bui.gettexture("storeCharacter"),
+            draw_controller=pmb,
+        )
+
+        bui.imagewidget(
+            parent=self._root_widget,
+            position=(x_offs6 + basew * 0.49 - imgw * 0.5 - 14, v + 86),
+            size=(imgw - 80, imgh - 80),
+            color=(1.00, 0.20, 0.20),
+            texture=bui.gettexture("heart"),
+            draw_controller=pmb,
+        )
+
+        bui.imagewidget(
+            parent=self._root_widget,
+            position=(x_offs6 + basew * 0.49 - imgw * 0.5 + 96, v + 120),
+            size=(imgw - 78, imgh - 78),
+            color=(1.00, 1.00, 0.00),
+            texture=bui.gettexture("star"),
+            draw_controller=pmb,
         )
         self._restore_state()
 
