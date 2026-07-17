@@ -175,24 +175,25 @@ def partial_format(string_template, **kwargs):
         string_template = string_template.replace("{" + key + "}", value)
     return string_template
 
+
 def draw_plugman_logo(parent, position, size, draw_controller=None):
     """Draws the Plugman logo with automatically scaled elements(crafted by brostos).
-    
+
     The Wizard is the Plugin Manager
     🧙‍♂️ The Wizard & Wand
-    Represents the talented modders who dedicate their time to crafting incredible 
+    Represents the talented modders who dedicate their time to crafting incredible
     mods for the BombSquad community.
-    
+
     ❤️ The Red Heart
     Originally grey in the original mod manager logo by @Mrmaxmeier.
-    The touch of red was added to represent our deep appreciation and love for 
+    The touch of red was added to represent our deep appreciation and love for
     the original creator, contributors, and all past and present plugin manager maintainers.
-    
+
     🪄 The Off-Center Star Stick
     The stick holds the star, but it is deliberately not centered perfectly.
-    This symbolizes imperfection: no plugin is ever completely perfect. It serves 
+    This symbolizes imperfection: no plugin is ever completely perfect. It serves
     as a reminder to keep updating and improving your plugins.
-    
+
     ⭐ The Star
     Highlights the open-source nature of the Plugin Manager and its community plugins.
     If you love the project, make sure to give it a star!
@@ -242,7 +243,6 @@ def draw_plugman_logo(parent, position, size, draw_controller=None):
         texture=bui.gettexture("star"),
         draw_controller=draw_controller,
     )
-
 
 
 class DNSBlockWorkaround:
@@ -3417,76 +3417,76 @@ class NewAllSettingsWindow(AllSettingsWindow):
             draw_controller=pmb
         )
         )
-        self._restore_state()
+            self._restore_state()
 
-    def _do_plugman(self) -> None:
-        # no-op if we're not in control.
-        if not self.main_window_has_control():
-            return
+        def _do_plugman(self) -> None:
+            # no-op if we're not in control.
+            if not self.main_window_has_control():
+        return
 
-        self.main_window_replace(
-            lambda: PluginManagerWindow(
-                origin_widget=self._plugman_button
-            )
+            self.main_window_replace(
+        lambda: PluginManagerWindow(
+            origin_widget=self._plugman_button
+        )
         )
 
-    def _save_state(self) -> None:
-        try:
+        def _save_state(self) -> None:
+            try:
             sel = self._root_widget.get_selected_child()
             if sel == self._controllers_button:
-                sel_name = 'Controllers'
+            sel_name = 'Controllers'
             elif sel == self._graphics_button:
-                sel_name = 'Graphics'
+            sel_name = 'Graphics'
             elif sel == self._audio_button:
-                sel_name = 'Audio'
+        sel_name= 'Audio'
             elif sel == self._advanced_button:
-                sel_name = 'Advanced'
+        sel_name= 'Advanced'
             elif sel == self._plugman_button:
-                sel_name = 'PlugMan'
+        sel_name= 'PlugMan'
             elif sel == self._back_button:
-                sel_name = 'Back'
+        sel_name= 'Back'
             else:
-                raise ValueError(f'unrecognized selection \'{sel}\'')
+        raise ValueError(f'unrecognized selection \'{sel}\'')
             assert bui.app.classic is not None
-            bui.app.ui_v1.window_states[type(self)] = {'sel_name': sel_name}
-        except Exception:
-            logging.exception('Error saving state for %s.', self)
+        bui.app.ui_v1.window_states[type(self)]= {'sel_name': sel_name}
+            except Exception:
+        logging.exception('Error saving state for %s.', self)
 
-    def _restore_state(self) -> None:
+            def _restore_state(self) -> None:
         try:
             assert bui.app.classic is not None
             sel_name = bui.app.ui_v1.window_states.get(type(self), {}).get(
-                'sel_name'
-            )
-            sel: bui.Widget | None
-            if sel_name == 'Controllers':
-                sel = self._controllers_button
-            elif sel_name == 'Graphics':
-                sel = self._graphics_button
-            elif sel_name == 'Audio':
-                sel = self._audio_button
-            elif sel_name == 'Advanced':
-                sel = self._advanced_button
-            elif sel_name == "PlugMan":
-                sel = self._plugman_button
-            elif sel_name == 'Back':
-                sel = self._back_button
-            else:
-                sel = self._controllers_button
-            if sel is not None:
-                bui.containerwidget(edit=self._root_widget, selected_child=sel)
-        except Exception:
-            logging.exception('Error restoring state for %s.', self)
+         'sel_name'
+          )
+           sel: bui.Widget | None
+           if sel_name == 'Controllers':
+           sel = self._controllers_button
+           elif sel_name == 'Graphics':
+           sel = self._graphics_button
+           elif sel_name == 'Audio':
+           sel = self._audio_button
+           elif sel_name == 'Advanced':
+           sel = self._advanced_button
+           elif sel_name == "PlugMan":
+           sel = self._plugman_button
+           elif sel_name == 'Back':
+           sel = self._back_button
+           else:
+           sel = self._controllers_button
+           if sel is not None:
+           bui.containerwidget(edit=self._root_widget, selected_child=sel)
+           except Exception:
+           logging.exception('Error restoring state for %s.', self)
 
 
-# ba_meta export babase.Plugin
-class EntryPoint(babase.Plugin):
-    def on_app_running(self) -> None:
-        """Called when the app is being launched."""
-        from bauiv1lib.settings import allsettings
-        allsettings.AllSettingsWindow = NewAllSettingsWindow
-        DNSBlockWorkaround.apply()
-        asyncio.set_event_loop(babase._asyncio._g_asyncio_event_loop)
-        startup_tasks = StartupTasks()
+                # ba_meta export babase.Plugin
+           class EntryPoint(babase.Plugin):
+           def on_app_running(self) -> None:
+                """Called when the app is being launched."""
+                from bauiv1lib.settings import allsettings
+                allsettings.AllSettingsWindow= NewAllSettingsWindow
+                DNSBlockWorkaround.apply()
+                asyncio.set_event_loop(babase._asyncio._g_asyncio_event_loop)
+                startup_tasks= StartupTasks()
 
-        loop.create_task(startup_tasks.execute())
+                loop.create_task(startup_tasks.execute())
