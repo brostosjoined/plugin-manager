@@ -175,6 +175,75 @@ def partial_format(string_template, **kwargs):
         string_template = string_template.replace("{" + key + "}", value)
     return string_template
 
+def draw_plugman_logo(parent, position, size, draw_controller=None):
+    """Draws the Plugman logo with automatically scaled elements(crafted by brostos).
+    
+    The Wizard is the Plugin Manager
+    🧙‍♂️ The Wizard & Wand
+    Represents the talented modders who dedicate their time to crafting incredible 
+    mods for the BombSquad community.
+    
+    ❤️ The Red Heart
+    Originally grey in the original mod manager logo by @Mrmaxmeier.
+    The touch of red was added to represent our deep appreciation and love for 
+    the original creator, contributors, and all past and present plugin manager maintainers.
+    
+    🪄 The Off-Center Star Stick
+    The stick holds the star, but it is deliberately not centered perfectly.
+    This symbolizes imperfection: no plugin is ever completely perfect. It serves 
+    as a reminder to keep updating and improving your plugins.
+    
+    ⭐ The Star
+    Highlights the open-source nature of the Plugin Manager and its community plugins.
+    If you love the project, make sure to give it a star!
+
+    Args:
+        parent: The parent widget (e.g., self._root_widget).
+        position (tuple): The (x, y) starting baseline coordinates of the logo.
+        size (float): The base width/height for the main asset. Defaults to 120.
+        draw_controller: The pmb drawing controller reference.
+    """
+    base_x, base_y = position
+
+    char_x = base_x + (size * 0.0417)       # Originally +5
+    char_y = base_y + (size * 0.2917)       # Originally +35
+
+    heart_size = size * 0.3333              # Originally size - 80 (40x40)
+    heart_x = base_x - (size * 0.1167)      # Originally -14
+    heart_y = base_y + (size * 0.7167)      # Originally +86
+
+    star_size = size * 0.35                 # Originally size - 78 (42x42)
+    star_x = base_x + (size * 0.80)         # Originally +96
+    star_y = base_y + (size * 1.00)         # Originally +120
+
+    bui.imagewidget(
+        parent=parent,
+        position=(char_x, char_y),
+        size=(size, size),
+        color=(0.8, 0.95, 1),
+        texture=bui.gettexture("storeCharacter"),
+        draw_controller=draw_controller,
+    )
+
+    bui.imagewidget(
+        parent=parent,
+        position=(heart_x, heart_y),
+        size=(heart_size, heart_size),
+        color=(1.00, 0.20, 0.20),
+        texture=bui.gettexture("heart"),
+        draw_controller=draw_controller,
+    )
+
+    bui.imagewidget(
+        parent=parent,
+        position=(star_x, star_y),
+        size=(star_size, star_size),
+        color=(1.00, 1.00, 0.00),
+        texture=bui.gettexture("star"),
+        draw_controller=draw_controller,
+    )
+
+
 
 class DNSBlockWorkaround:
     """
@@ -3341,35 +3410,12 @@ class NewAllSettingsWindow(AllSettingsWindow):
             on_activate_call=self._do_plugman
         )
         _b_title(x_offs6, v, pmb, bui.Lstr(value="Plugin Manager"))
-        imgw = imgh = 120
-        # Logo crafted by brostos
-        # Wizard holding magic wand(Powerful Modders)
-        # Wizard holding heart( Mrmaxmeier and red for the maintainers of plugman)
-        bui.imagewidget(
+        draw_plugman_logo(
             parent=self._root_widget,
-            position=(x_offs6 + basew * 0.49 - imgw * 0.5 + 5, v + 35),
-            size=(imgw, imgh),
-            color=(0.8, 0.95, 1),
-            texture=bui.gettexture("storeCharacter"),
-            draw_controller=pmb,
+            position=(x_offs6 + basew * 0.49 - 120 * 0.5, v),
+            size=110,
+            draw_controller=pmb
         )
-
-        bui.imagewidget(
-            parent=self._root_widget,
-            position=(x_offs6 + basew * 0.49 - imgw * 0.5 - 14, v + 86),
-            size=(imgw - 80, imgh - 80),
-            color=(1.00, 0.20, 0.20),
-            texture=bui.gettexture("heart"),
-            draw_controller=pmb,
-        )
-
-        bui.imagewidget(
-            parent=self._root_widget,
-            position=(x_offs6 + basew * 0.49 - imgw * 0.5 + 96, v + 120),
-            size=(imgw - 78, imgh - 78),
-            color=(1.00, 1.00, 0.00),
-            texture=bui.gettexture("star"),
-            draw_controller=pmb,
         )
         self._restore_state()
 
