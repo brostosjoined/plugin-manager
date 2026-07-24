@@ -177,7 +177,8 @@ def partial_format(string_template, **kwargs):
 
 
 def draw_plugman_logo(parent, position, size, draw_controller=None):
-    """Draws the Plugman logo with automatically scaled elements(crafted by brostos).
+    """
+    Draws the Plugman logo with automatically scaled elements(crafted by brostos).
 
     The Wizard is the Plugin Manager
     🧙‍♂️ The Wizard & Wand
